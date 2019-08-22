@@ -1,0 +1,20 @@
+# config server.port
+server:
+  port: 8080
+#  config dataSource
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/waimai?characterEncoding=utf-8&serverTimezone=UTC
+    username: root
+    password: cq918918
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.j1904.pojo
+
+#config mybatis
+
+
+
+

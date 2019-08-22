@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.j1904.mapper.BusinessTableMapper" >
+  <resultMap id="BaseResultMap" type="com.j1904.pojo.BusinessTable" >
+    <id column="businessId" property="businessid" jdbcType="INTEGER" />
+    <result column="businessName" property="businessname" jdbcType="VARCHAR" />
+    <result column="businessPwd" property="businesspwd" jdbcType="VARCHAR" />
+    <result column="businessAddress" property="businessaddress" jdbcType="VARCHAR" />
+    <result column="businessPhone" property="businessphone" jdbcType="VARCHAR" />
+    <result column="businessState" property="businessstate" jdbcType="INTEGER" />
+    <result column="businessInfo" property="businessinfo" jdbcType="VARCHAR" />
+    <result column="businessImg" property="businessimg" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    businessId, businessName, businessPwd, businessAddress, businessPhone, businessState, 
+    businessInfo, businessImg
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.j1904.pojo.BusinessTableExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from business_table
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from business_table
+    where businessId = #{businessid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from business_table
+    where businessId = #{businessid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.j1904.pojo.BusinessTableExample" >
+    delete from business_table
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.j1904.pojo.BusinessTable" >
+    insert into business_table (businessId, businessName, businessPwd, 
+      businessAddress, businessPhone, businessState, 
+      businessInfo, businessImg)
+    values (#{businessid,jdbcType=INTEGER}, #{businessname,jdbcType=VARCHAR}, #{businesspwd,jdbcType=VARCHAR}, 
+      #{businessaddress,jdbcType=VARCHAR}, #{businessphone,jdbcType=VARCHAR}, #{businessstate,jdbcType=INTEGER}, 
+      #{businessinfo,jdbcType=VARCHAR}, #{businessimg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.j1904.pojo.BusinessTable" >
+    insert into business_table
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="businessid != null" >
+        businessId,
+      </if>
+      <if test="businessname != null" >
+        businessName,
+      </if>
+      <if test="businesspwd != null" >
+        businessPwd,
+      </if>
+      <if test="businessaddress != null" >
+        businessAddress,
+      </if>
+      <if test="businessphone != null" >
+        businessPhone,
+      </if>
+      <if test="businessstate != null" >
+        businessState,
+      </if>
+      <if test="businessinfo != null" >
+        businessInfo,
+      </if>
+      <if test="businessimg != null" >
+        businessImg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="businessid != null" >
+        #{businessid,jdbcType=INTEGER},
+      </if>
+      <if test="businessname != null" >
+        #{businessname,jdbcType=VARCHAR},
+      </if>
+      <if test="businesspwd != null" >
+        #{businesspwd,jdbcType=VARCHAR},
+      </if>
+      <if test="businessaddress != null" >
+        #{businessaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="businessphone != null" >
+        #{businessphone,jdbcType=VARCHAR},
+      </if>
+      <if test="businessstate != null" >
+        #{businessstate,jdbcType=INTEGER},
+      </if>
+      <if test="businessinfo != null" >
+        #{businessinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="businessimg != null" >
+        #{businessimg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.j1904.pojo.BusinessTableExample" resultType="java.lang.Integer" >
+    select count(*) from business_table
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update business_table
+    <set >
+      <if test="record.businessid != null" >
+        businessId = #{record.businessid,jdbcType=INTEGER},
+      </if>
+      <if test="record.businessname != null" >
+        businessName = #{record.businessname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businesspwd != null" >
+        businessPwd = #{record.businesspwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessaddress != null" >
+        businessAddress = #{record.businessaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessphone != null" >
+        businessPhone = #{record.businessphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessstate != null" >
+        businessState = #{record.businessstate,jdbcType=INTEGER},
+      </if>
+      <if test="record.businessinfo != null" >
+        businessInfo = #{record.businessinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessimg != null" >
+        businessImg = #{record.businessimg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update business_table
+    set businessId = #{record.businessid,jdbcType=INTEGER},
+      businessName = #{record.businessname,jdbcType=VARCHAR},
+      businessPwd = #{record.businesspwd,jdbcType=VARCHAR},
+      businessAddress = #{record.businessaddress,jdbcType=VARCHAR},
+      businessPhone = #{record.businessphone,jdbcType=VARCHAR},
+      businessState = #{record.businessstate,jdbcType=INTEGER},
+      businessInfo = #{record.businessinfo,jdbcType=VARCHAR},
+      businessImg = #{record.businessimg,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.j1904.pojo.BusinessTable" >
+    update business_table
+    <set >
+      <if test="businessname != null" >
+        businessName = #{businessname,jdbcType=VARCHAR},
+      </if>
+      <if test="businesspwd != null" >
+        businessPwd = #{businesspwd,jdbcType=VARCHAR},
+      </if>
+      <if test="businessaddress != null" >
+        businessAddress = #{businessaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="businessphone != null" >
+        businessPhone = #{businessphone,jdbcType=VARCHAR},
+      </if>
+      <if test="businessstate != null" >
+        businessState = #{businessstate,jdbcType=INTEGER},
+      </if>
+      <if test="businessinfo != null" >
+        businessInfo = #{businessinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="businessimg != null" >
+        businessImg = #{businessimg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where businessId = #{businessid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.j1904.pojo.BusinessTable" >
+    update business_table
+    set businessName = #{businessname,jdbcType=VARCHAR},
+      businessPwd = #{businesspwd,jdbcType=VARCHAR},
+      businessAddress = #{businessaddress,jdbcType=VARCHAR},
+      businessPhone = #{businessphone,jdbcType=VARCHAR},
+      businessState = #{businessstate,jdbcType=INTEGER},
+      businessInfo = #{businessinfo,jdbcType=VARCHAR},
+      businessImg = #{businessimg,jdbcType=VARCHAR}
+    where businessId = #{businessid,jdbcType=INTEGER}
+  </update>
+</mapper>

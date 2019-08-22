@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.j1904.mapper.OrderTableMapper" >
+  <resultMap id="BaseResultMap" type="com.j1904.pojo.OrderTable" >
+    <id column="oid" property="oid" jdbcType="INTEGER" />
+    <result column="oname" property="oname" jdbcType="VARCHAR" />
+    <result column="ocreatTime" property="ocreattime" jdbcType="TIMESTAMP" />
+    <result column="ocustomerName" property="ocustomername" jdbcType="VARCHAR" />
+    <result column="ocustomerPhone" property="ocustomerphone" jdbcType="VARCHAR" />
+    <result column="ocustomerAddress" property="ocustomeraddress" jdbcType="VARCHAR" />
+    <result column="ogoodsName" property="ogoodsname" jdbcType="VARCHAR" />
+    <result column="ogoodsUnitprice" property="ogoodsunitprice" jdbcType="DOUBLE" />
+    <result column="oremarks" property="oremarks" jdbcType="VARCHAR" />
+    <result column="ostate" property="ostate" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    oid, oname, ocreatTime, ocustomerName, ocustomerPhone, ocustomerAddress, ogoodsName, 
+    ogoodsUnitprice, oremarks, ostate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.j1904.pojo.OrderTableExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from order_table
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from order_table
+    where oid = #{oid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from order_table
+    where oid = #{oid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.j1904.pojo.OrderTableExample" >
+    delete from order_table
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.j1904.pojo.OrderTable" >
+    insert into order_table (oid, oname, ocreatTime, 
+      ocustomerName, ocustomerPhone, ocustomerAddress, 
+      ogoodsName, ogoodsUnitprice, oremarks, 
+      ostate)
+    values (#{oid,jdbcType=INTEGER}, #{oname,jdbcType=VARCHAR}, #{ocreattime,jdbcType=TIMESTAMP}, 
+      #{ocustomername,jdbcType=VARCHAR}, #{ocustomerphone,jdbcType=VARCHAR}, #{ocustomeraddress,jdbcType=VARCHAR}, 
+      #{ogoodsname,jdbcType=VARCHAR}, #{ogoodsunitprice,jdbcType=DOUBLE}, #{oremarks,jdbcType=VARCHAR}, 
+      #{ostate,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.j1904.pojo.OrderTable" >
+    insert into order_table
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="oid != null" >
+        oid,
+      </if>
+      <if test="oname != null" >
+        oname,
+      </if>
+      <if test="ocreattime != null" >
+        ocreatTime,
+      </if>
+      <if test="ocustomername != null" >
+        ocustomerName,
+      </if>
+      <if test="ocustomerphone != null" >
+        ocustomerPhone,
+      </if>
+      <if test="ocustomeraddress != null" >
+        ocustomerAddress,
+      </if>
+      <if test="ogoodsname != null" >
+        ogoodsName,
+      </if>
+      <if test="ogoodsunitprice != null" >
+        ogoodsUnitprice,
+      </if>
+      <if test="oremarks != null" >
+        oremarks,
+      </if>
+      <if test="ostate != null" >
+        ostate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="oid != null" >
+        #{oid,jdbcType=INTEGER},
+      </if>
+      <if test="oname != null" >
+        #{oname,jdbcType=VARCHAR},
+      </if>
+      <if test="ocreattime != null" >
+        #{ocreattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ocustomername != null" >
+        #{ocustomername,jdbcType=VARCHAR},
+      </if>
+      <if test="ocustomerphone != null" >
+        #{ocustomerphone,jdbcType=VARCHAR},
+      </if>
+      <if test="ocustomeraddress != null" >
+        #{ocustomeraddress,jdbcType=VARCHAR},
+      </if>
+      <if test="ogoodsname != null" >
+        #{ogoodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="ogoodsunitprice != null" >
+        #{ogoodsunitprice,jdbcType=DOUBLE},
+      </if>
+      <if test="oremarks != null" >
+        #{oremarks,jdbcType=VARCHAR},
+      </if>
+      <if test="ostate != null" >
+        #{ostate,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.j1904.pojo.OrderTableExample" resultType="java.lang.Integer" >
+    select count(*) from order_table
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update order_table
+    <set >
+      <if test="record.oid != null" >
+        oid = #{record.oid,jdbcType=INTEGER},
+      </if>
+      <if test="record.oname != null" >
+        oname = #{record.oname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ocreattime != null" >
+        ocreatTime = #{record.ocreattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ocustomername != null" >
+        ocustomerName = #{record.ocustomername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ocustomerphone != null" >
+        ocustomerPhone = #{record.ocustomerphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ocustomeraddress != null" >
+        ocustomerAddress = #{record.ocustomeraddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ogoodsname != null" >
+        ogoodsName = #{record.ogoodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ogoodsunitprice != null" >
+        ogoodsUnitprice = #{record.ogoodsunitprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oremarks != null" >
+        oremarks = #{record.oremarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ostate != null" >
+        ostate = #{record.ostate,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update order_table
+    set oid = #{record.oid,jdbcType=INTEGER},
+      oname = #{record.oname,jdbcType=VARCHAR},
+      ocreatTime = #{record.ocreattime,jdbcType=TIMESTAMP},
+      ocustomerName = #{record.ocustomername,jdbcType=VARCHAR},
+      ocustomerPhone = #{record.ocustomerphone,jdbcType=VARCHAR},
+      ocustomerAddress = #{record.ocustomeraddress,jdbcType=VARCHAR},
+      ogoodsName = #{record.ogoodsname,jdbcType=VARCHAR},
+      ogoodsUnitprice = #{record.ogoodsunitprice,jdbcType=DOUBLE},
+      oremarks = #{record.oremarks,jdbcType=VARCHAR},
+      ostate = #{record.ostate,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.j1904.pojo.OrderTable" >
+    update order_table
+    <set >
+      <if test="oname != null" >
+        oname = #{oname,jdbcType=VARCHAR},
+      </if>
+      <if test="ocreattime != null" >
+        ocreatTime = #{ocreattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ocustomername != null" >
+        ocustomerName = #{ocustomername,jdbcType=VARCHAR},
+      </if>
+      <if test="ocustomerphone != null" >
+        ocustomerPhone = #{ocustomerphone,jdbcType=VARCHAR},
+      </if>
+      <if test="ocustomeraddress != null" >
+        ocustomerAddress = #{ocustomeraddress,jdbcType=VARCHAR},
+      </if>
+      <if test="ogoodsname != null" >
+        ogoodsName = #{ogoodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="ogoodsunitprice != null" >
+        ogoodsUnitprice = #{ogoodsunitprice,jdbcType=DOUBLE},
+      </if>
+      <if test="oremarks != null" >
+        oremarks = #{oremarks,jdbcType=VARCHAR},
+      </if>
+      <if test="ostate != null" >
+        ostate = #{ostate,jdbcType=INTEGER},
+      </if>
+    </set>
+    where oid = #{oid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.j1904.pojo.OrderTable" >
+    update order_table
+    set oname = #{oname,jdbcType=VARCHAR},
+      ocreatTime = #{ocreattime,jdbcType=TIMESTAMP},
+      ocustomerName = #{ocustomername,jdbcType=VARCHAR},
+      ocustomerPhone = #{ocustomerphone,jdbcType=VARCHAR},
+      ocustomerAddress = #{ocustomeraddress,jdbcType=VARCHAR},
+      ogoodsName = #{ogoodsname,jdbcType=VARCHAR},
+      ogoodsUnitprice = #{ogoodsunitprice,jdbcType=DOUBLE},
+      oremarks = #{oremarks,jdbcType=VARCHAR},
+      ostate = #{ostate,jdbcType=INTEGER}
+    where oid = #{oid,jdbcType=INTEGER}
+  </update>
+</mapper>
